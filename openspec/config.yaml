@@ -1,0 +1,24 @@
+project:
+  name: fetchmark
+  description: Angular SSR Web Application with Tailwind CSS v4 and Express backend
+  version: 0.0.0
+  mode: openspec
+  strict_tdd: true
+
+stack:
+  framework: Angular 22.1.0 (SSR + Express 5.1.0)
+  language: TypeScript 6.0.2
+  styles: Tailwind CSS 4.1.12 (@tailwindcss/postcss)
+  build_tool: "@angular/build"
+  package_manager: npm 12.0.1
+
+testing:
+  runner: Vitest 4.0.8 (via @angular/build:unit-test / ng test)
+  environment: jsdom 28.0.0
+  layers:
+    - unit (src/**/*.spec.ts)
+  command: npm test -- --watch=false
+  coverage: Vitest default coverage / c8 / v8
+  linter: none (TypeScript compiler / tsc checks)
+  formatter: Prettier 3.8.1
+  type_checker: TypeScript 6.0.2 (tsc / ng build)
