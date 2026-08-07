@@ -34,7 +34,7 @@ export function verifyToken(token: string): AuthPayload | null {
   }
 }
 
-export function parseCookies(req: IncomingMessage | { headers: Record<string, string | string[] | undefined> }): Record<string, string> {
+export function parseCookies(req: IncomingMessage | { headers: Record<string, string | string[] | undefined> }): Record<string, string | undefined> {
   const cookieHeader = req.headers.cookie || req.headers['cookie'];
   if (typeof cookieHeader === 'string') {
     return parse(cookieHeader);

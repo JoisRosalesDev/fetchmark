@@ -1,7 +1,7 @@
 import type { IncomingMessage } from 'node:http';
 
 export async function parseJsonBody<T>(req: IncomingMessage): Promise<T | null> {
-  const reqRecord = req as Record<string, unknown>;
+  const reqRecord = req as unknown as Record<string, unknown>;
   if (reqRecord['body'] !== undefined && reqRecord['body'] !== null) {
     const body = reqRecord['body'];
     if (typeof body === 'object') {
@@ -35,7 +35,7 @@ export async function parseJsonBody<T>(req: IncomingMessage): Promise<T | null> 
 }
 
 export function getIdParam(req: IncomingMessage): string | null {
-  const reqRecord = req as Record<string, unknown>;
+  const reqRecord = req as unknown as Record<string, unknown>;
   if (reqRecord['query'] && typeof reqRecord['query'] === 'object') {
     const query = reqRecord['query'] as Record<string, string | string[]>;
     if (query['id']) {
@@ -53,7 +53,7 @@ export function getIdParam(req: IncomingMessage): string | null {
 }
 
 export function getQueryParam(req: IncomingMessage, paramName: string): string | null {
-  const reqRecord = req as Record<string, unknown>;
+  const reqRecord = req as unknown as Record<string, unknown>;
   if (reqRecord['query'] && typeof reqRecord['query'] === 'object') {
     const query = reqRecord['query'] as Record<string, string | string[]>;
     const val = query[paramName];
