@@ -8,7 +8,7 @@ export const routes: Routes = [
       import('./pages/landing/landing-page.component').then(
         (m) => m.LandingPageComponent
       ),
-    title: 'FetchMark - Guarda y Organiza tus Enlaces',
+    title: 'FetchMark - Gestor Inteligente de Marcadores Web y YouTube',
   },
   {
     path: 'login',
@@ -25,7 +25,7 @@ export const routes: Routes = [
         (m) => m.DashboardPageComponent
       ),
     canActivate: [authGuard],
-    title: 'Dashboard - FetchMark',
+    title: 'Panel de Control - FetchMark',
   },
   {
     path: '**',
