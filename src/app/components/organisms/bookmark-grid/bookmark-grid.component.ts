@@ -16,7 +16,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   ],
   template: `
     @if (loading()) {
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         @for (item of skeletonArray; track $index) {
           <app-bookmark-skeleton />
         }
@@ -42,7 +42,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
         </app-button>
       </div>
     } @else {
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         @for (item of bookmarks(); track item.id) {
           <app-bookmark-card
             [bookmark]="item"

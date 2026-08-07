@@ -1,7 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { User } from '../../../core/models';
 import { AvatarComponent } from '../../atoms/avatar/avatar.component';
-import { ButtonComponent } from '../../atoms/button/button.component';
 import { IconComponent } from '../../atoms/icon/icon.component';
 import { SearchBarComponent } from '../../molecules/search-bar/search-bar.component';
 
@@ -10,7 +9,6 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
   standalone: true,
   imports: [
     AvatarComponent,
-    ButtonComponent,
     IconComponent,
     SearchBarComponent,
   ],
@@ -18,11 +16,11 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
     <header
       class="sticky top-0 z-30 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md px-4 py-3"
     >
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+      <div class="max-w-[1600px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
         <div class="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
-            class="lg:hidden p-2 rounded-xl text-slate-300 hover:bg-slate-800 focus:outline-none transition-colors"
+            class="md:hidden p-2 rounded-xl text-slate-300 hover:bg-slate-800 focus:outline-none transition-colors"
             (click)="toggleSidebar.emit()"
             title="Abrir menú"
           >
@@ -50,26 +48,6 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3">
-          <app-button
-            variant="primary"
-            size="md"
-            class="hidden sm:inline-flex"
-            (btnClick)="newBookmark.emit()"
-          >
-            <app-icon name="plus" size="sm" class="mr-1.5" />
-            Nuevo marcador
-          </app-button>
-
-          <app-button
-            variant="primary"
-            size="sm"
-            class="sm:hidden"
-            (btnClick)="newBookmark.emit()"
-            title="Nuevo marcador"
-          >
-            <app-icon name="plus" size="sm" />
-          </app-button>
-
           @if (user()) {
             <div class="flex items-center gap-2.5 pl-3 border-l border-slate-800">
               <app-avatar
@@ -77,7 +55,7 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
                 [name]="user()?.name || user()?.email || 'Usuario'"
                 size="md"
               />
-              <span class="hidden lg:inline-block text-xs font-bold text-slate-200 max-w-[140px] truncate">
+              <span class="hidden md:inline-block text-xs font-bold text-slate-200 max-w-[140px] truncate">
                 {{ user()?.name || user()?.email }}
               </span>
               <button
@@ -100,8 +78,7 @@ export class NavbarComponent {
   searchQuery = input<string>('');
 
   searchChange = output<string>();
-  newBookmark = output<void>();
-  newFolder = output<void>();
   logout = output<void>();
   toggleSidebar = output<void>();
 }
+

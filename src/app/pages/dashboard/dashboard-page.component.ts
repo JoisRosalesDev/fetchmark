@@ -36,8 +36,6 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
         [user]="authService.currentUser()"
         [searchQuery]="bookmarkService.searchQuery()"
         (searchChange)="onSearchChange($event)"
-        (newBookmark)="onOpenNewBookmarkModal()"
-        (newFolder)="onOpenNewFolderModal()"
         (logout)="onLogout()"
         (toggleSidebar)="isMobileSidebarOpen.update(v => !v)"
       />
