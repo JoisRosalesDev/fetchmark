@@ -194,10 +194,12 @@ app.get('/api/auth/google', (req: Request, res: Response) => {
     return;
   }
 
-  const host = req.headers.host || 'localhost:4200';
-  const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') ? 'http' : 'https');
-  const appUrl = process.env['APP_URL'] || `${protocol}://${host}`;
-  const redirectUri = process.env['GOOGLE_REDIRECT_URI'] || `${appUrl}/api/auth/callback`;
+  const rawHost = (req.headers['x-forwarded-host'] as string) || req.headers.host || 'localhost:4200';
+  const host = Array.isArray(rawHost) ? rawHost[0] : rawHost;
+  const protoHeader = req.headers['x-forwarded-proto'];
+  const protocol = Array.isArray(protoHeader) ? protoHeader[0] : protoHeader || (host.includes('localhost') ? 'http' : 'https');
+  const appUrl = process.env['APP_URL'] ? process.env['APP_URL'].replace(/\/$/, '') : `${protocol}://${host}`;
+  const redirectUri = process.env['GOOGLE_REDIRECT_URI'] ? process.env['GOOGLE_REDIRECT_URI'].trim() : `${appUrl}/api/auth/callback`;
 
   const state = crypto.randomBytes(16).toString('hex');
   const stateCookie = serialize('fetchmark_oauth_state', state, {
@@ -223,10 +225,12 @@ app.get('/api/auth/google', (req: Request, res: Response) => {
 });
 
 app.get('/api/auth/callback', async (req: Request, res: Response) => {
-  const host = req.headers.host || 'localhost:4200';
-  const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') ? 'http' : 'https');
-  const appUrl = process.env['APP_URL'] || `${protocol}://${host}`;
-  const redirectUri = process.env['GOOGLE_REDIRECT_URI'] || `${appUrl}/api/auth/callback`;
+  const rawHost = (req.headers['x-forwarded-host'] as string) || req.headers.host || 'localhost:4200';
+  const host = Array.isArray(rawHost) ? rawHost[0] : rawHost;
+  const protoHeader = req.headers['x-forwarded-proto'];
+  const protocol = Array.isArray(protoHeader) ? protoHeader[0] : protoHeader || (host.includes('localhost') ? 'http' : 'https');
+  const appUrl = process.env['APP_URL'] ? process.env['APP_URL'].replace(/\/$/, '') : `${protocol}://${host}`;
+  const redirectUri = process.env['GOOGLE_REDIRECT_URI'] ? process.env['GOOGLE_REDIRECT_URI'].trim() : `${appUrl}/api/auth/callback`;
 
   const code = req.query['code'] as string | undefined;
   const state = req.query['state'] as string | undefined;
