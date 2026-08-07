@@ -19,25 +19,14 @@ export class AuthService {
   readonly isLoading = signal<boolean>(true);
   readonly isAuthenticated = computed(() => !!this.currentUser());
 
-  private checkSessionObservable: Observable<User | null> | null = null;
-
   checkSession(): Observable<User | null> {
     if (!isPlatformBrowser(this.platformId)) {
       this.isLoading.set(false);
       return of(null);
     }
 
-    if (this.currentUser()) {
-      this.isLoading.set(false);
-      return of(this.currentUser());
-    }
-
-    if (this.checkSessionObservable) {
-      return this.checkSessionObservable;
-    }
-
     this.isLoading.set(true);
-    this.checkSessionObservable = this.http
+    return this.http
       .get<User>(`${environment.apiBaseUrl}/auth/me`, {
         withCredentials: true,
       })
@@ -45,17 +34,13 @@ export class AuthService {
         tap((user) => {
           this.currentUser.set(user);
           this.isLoading.set(false);
-          this.checkSessionObservable = null;
         }),
         catchError(() => {
           this.currentUser.set(null);
           this.isLoading.set(false);
-          this.checkSessionObservable = null;
           return of(null);
         })
       );
-
-    return this.checkSessionObservable;
   }
 
   loginWithGoogle(): void {
