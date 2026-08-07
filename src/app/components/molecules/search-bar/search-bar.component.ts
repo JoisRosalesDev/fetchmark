@@ -14,13 +14,13 @@ import { IconComponent } from '../../atoms/icon/icon.component';
         type="text"
         [value]="query()"
         [placeholder]="placeholder()"
-        class="w-full bg-slate-950 text-slate-100 border border-slate-800 rounded-xl pl-10 pr-10 py-2.5 text-sm transition-all duration-150 state-focus placeholder:text-slate-500 font-medium focus:bg-slate-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+        class="w-full bg-slate-100 text-slate-900 border border-slate-200 rounded-xl pl-10 pr-10 py-2.5 text-sm transition-all duration-150 state-focus placeholder:text-slate-400 font-medium focus:bg-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500/20"
         (input)="onInput($event)"
       />
       @if (query().length > 0) {
         <button
           type="button"
-          class="absolute right-3 text-slate-400 hover:text-slate-200 p-0.5 rounded-md state-focus transition-colors"
+          class="absolute right-3 text-slate-400 hover:text-slate-600 p-0.5 rounded-md state-focus transition-colors cursor-pointer"
           title="Limpiar búsqueda"
           (click)="clearSearch()"
         >

@@ -25,10 +25,10 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   template: `
     @if (isOpen()) {
       <div
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in"
       >
         <div
-          class="bg-slate-900 w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-slate-800 animate-slide-up p-6 text-slate-100"
+          class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-slate-200 animate-slide-up p-6 text-slate-900"
         >
           <app-modal-header
             [title]="isEditing() ? 'Editar Marcador' : 'Nuevo Marcador'"
@@ -42,7 +42,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
 
           <form (ngSubmit)="onSubmit()" class="mt-4 space-y-4">
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 URL del enlace <span class="text-rose-500">*</span>
               </label>
               <div class="relative">
@@ -52,17 +52,17 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                   name="url"
                   required
                   placeholder="https://ejemplo.com/articulo"
-                  class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all pr-10 shadow-xs"
+                  class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all pr-10 shadow-xs"
                   (blur)="onUrlBlur()"
                 />
                 @if (bookmarkService.scraping()) {
-                  <div class="absolute right-3.5 top-3 text-brand-400 animate-spin">
+                  <div class="absolute right-3.5 top-3 text-indigo-600 animate-spin">
                     <app-icon name="loader" size="sm" />
                   </div>
                 }
               </div>
               @if (scrapingSuccess()) {
-                <p class="text-xs text-emerald-400 font-semibold mt-1 flex items-center gap-1">
+                <p class="text-xs text-emerald-600 font-semibold mt-1 flex items-center gap-1">
                   <app-icon name="check" size="sm" />
                   Metadatos extraídos automáticamente
                 </p>
@@ -70,7 +70,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Título <span class="text-rose-500">*</span>
               </label>
               <input
@@ -79,12 +79,12 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                 name="title"
                 required
                 placeholder="Título descriptivo del marcador"
-                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
+                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all shadow-xs"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Descripción
               </label>
               <textarea
@@ -92,18 +92,18 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                 name="description"
                 rows="3"
                 placeholder="Breve descripción u observaciones"
-                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all resize-none shadow-xs"
+                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all resize-none shadow-xs"
               ></textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Carpeta
               </label>
               <select
                 [(ngModel)]="folderId"
                 name="folderId"
-                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
+                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all shadow-xs"
               >
                 <option [value]="null">Sin carpeta</option>
                 @for (folder of folders(); track folder.id) {
@@ -114,7 +114,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                   Imagen OG (URL)
                 </label>
                 <input
@@ -122,11 +122,11 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                   [(ngModel)]="ogImage"
                   name="ogImage"
                   placeholder="https://..."
-                  class="w-full px-3 py-2 text-xs rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
+                  class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all shadow-xs"
                 />
               </div>
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                   Favicon (URL)
                 </label>
                 <input
@@ -134,12 +134,12 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                   [(ngModel)]="favicon"
                   name="favicon"
                   placeholder="https://..."
-                  class="w-full px-3 py-2 text-xs rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
+                  class="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 outline-none transition-all shadow-xs"
                 />
               </div>
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800 mt-6">
+            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 mt-6">
               <app-button variant="ghost" size="md" (btnClick)="onClose()">
                 Cancelar
               </app-button>

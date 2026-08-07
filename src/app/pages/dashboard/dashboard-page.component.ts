@@ -10,7 +10,6 @@ import { FolderTreeComponent } from '../../components/organisms/folder-tree/fold
 import { BookmarkGridComponent } from '../../components/organisms/bookmark-grid/bookmark-grid.component';
 import { BookmarkFormModalComponent } from '../../components/organisms/bookmark-form-modal/bookmark-form-modal.component';
 import { FolderFormModalComponent } from '../../components/organisms/folder-form-modal/folder-form-modal.component';
-import { ButtonComponent } from '../../components/atoms/button/button.component';
 import { IconComponent } from '../../components/atoms/icon/icon.component';
 
 @Component({
@@ -23,7 +22,6 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
     BookmarkGridComponent,
     BookmarkFormModalComponent,
     FolderFormModalComponent,
-    ButtonComponent,
     IconComponent,
   ],
   template: `
@@ -55,31 +53,23 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
       <div content class="space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 class="text-xl font-bold text-slate-100">
+            <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
               {{ activeFolderName() }}
             </h1>
-            <p class="text-xs text-slate-400 mt-0.5">
+            <p class="text-xs text-slate-500 mt-0.5 font-medium">
               {{ bookmarkService.bookmarks().length }} marcadores guardados
             </p>
           </div>
 
           <div class="flex items-center gap-2">
-            <app-button
-              variant="secondary"
-              size="sm"
-              (btnClick)="onOpenNewFolderModal()"
+            <button
+              type="button"
+              class="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all text-sm flex items-center gap-2 cursor-pointer touch-manipulation"
+              (click)="onOpenNewBookmarkModal()"
             >
-              <app-icon name="folder-plus" size="sm" class="mr-1.5" />
-              Nueva carpeta
-            </app-button>
-            <app-button
-              variant="primary"
-              size="sm"
-              (btnClick)="onOpenNewBookmarkModal()"
-            >
-              <app-icon name="plus" size="sm" class="mr-1.5" />
-              Nuevo marcador
-            </app-button>
+              <app-icon name="plus" size="sm" />
+              Nuevo Marcador
+            </button>
           </div>
         </div>
 

@@ -6,20 +6,20 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   standalone: true,
   imports: [IconComponent],
   template: `
-    <div class="flex items-start justify-between pb-4 border-b border-slate-800">
+    <div class="flex items-start justify-between pb-4 border-b border-slate-200">
       <div>
-        <h3 class="text-lg font-extrabold text-slate-100 leading-tight">
+        <h3 class="text-lg font-extrabold text-slate-900 leading-tight">
           {{ title() }}
         </h3>
         @if (subtitle()) {
-          <p class="text-xs font-medium text-slate-400 mt-1">
+          <p class="text-xs font-medium text-slate-500 mt-1">
             {{ subtitle() }}
           </p>
         }
       </div>
       <button
         type="button"
-        class="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors state-focus"
+        class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors state-focus cursor-pointer"
         title="Cerrar modal"
         (click)="onClose()"
       >

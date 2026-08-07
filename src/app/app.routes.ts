@@ -1,25 +1,37 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login/login-page.component';
-import { DashboardPageComponent } from './pages/dashboard/dashboard-page.component';
 import { authGuard } from './core/guards/auth.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
   {
-    path: 'login',
-    component: LoginPageComponent,
+    path: '',
+    loadComponent: () =>
+      import('./pages/landing/landing-page.component').then(
+        (m) => m.LandingPageComponent
+      ),
+    canActivate: [guestGuard],
+    title: 'FetchMark - Guarda y Organiza tus Enlaces',
   },
   {
     path: 'dashboard',
-    component: DashboardPageComponent,
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard-page.component').then(
+        (m) => m.DashboardPageComponent
+      ),
     canActivate: [authGuard],
+    title: 'Dashboard - FetchMark',
   },
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login-page.component').then(
+        (m) => m.LoginPageComponent
+      ),
+    canActivate: [guestGuard],
+    title: 'Iniciar Sesión - FetchMark',
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: '',
   },
 ];

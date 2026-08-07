@@ -2,16 +2,17 @@ import { Component, computed, input, output, signal } from '@angular/core';
 import { Bookmark } from '../../../core/models';
 import { BadgeComponent } from '../../atoms/badge/badge.component';
 import { IconComponent } from '../../atoms/icon/icon.component';
+import { BookmarkActionsMenuComponent } from '../bookmark-actions-menu/bookmark-actions-menu.component';
 
 @Component({
   selector: 'app-bookmark-card',
   standalone: true,
-  imports: [BadgeComponent, IconComponent],
+  imports: [BadgeComponent, IconComponent, BookmarkActionsMenuComponent],
   template: `
     <div
-      class="group relative flex flex-col h-full bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xs hover:border-brand-500/50 hover:shadow-lg hover:shadow-brand-950/40 hover:-translate-y-1 transition-all duration-200 text-slate-100 break-inside-avoid"
+      class="group relative flex flex-col h-full bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-card-hover hover:-translate-y-1 transition-all duration-200 text-slate-900 break-inside-avoid"
     >
-      <div class="relative w-full aspect-[16/9] overflow-hidden bg-slate-950 shrink-0 border-b border-slate-800">
+      <div class="relative w-full aspect-video overflow-hidden bg-slate-100 shrink-0 border-b border-slate-200">
         @if (bookmark().ogImage && !hasImageError()) {
           <img
             [src]="bookmark().ogImage"
@@ -21,10 +22,10 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           />
         } @else {
           <div
-            class="h-full w-full bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950/60 flex flex-col items-center justify-center p-4 text-center"
+            class="h-full w-full bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 flex flex-col items-center justify-center p-4 text-center"
           >
             <div
-              class="w-10 h-10 rounded-full bg-slate-800 shadow-xs flex items-center justify-center text-brand-400 mb-1.5 border border-slate-700/60"
+              class="w-10 h-10 rounded-full bg-white shadow-xs flex items-center justify-center text-indigo-600 mb-1.5 border border-slate-200"
             >
               @if (bookmark().favicon && !hasFaviconError()) {
                 <img
@@ -37,31 +38,18 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                 <app-icon name="globe" size="lg" />
               }
             </div>
-            <span class="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-800/80 text-brand-400 border border-slate-700/60 truncate max-w-full">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-md bg-white text-indigo-600 border border-slate-200 truncate max-w-full">
               {{ domainName() }}
             </span>
           </div>
         }
 
-        <div
-          class="absolute top-2.5 right-2.5 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-10"
-        >
-          <button
-            type="button"
-            class="p-1.5 rounded-lg bg-slate-800/95 text-slate-200 hover:text-brand-400 shadow-md border border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
-            title="Editar marcador"
-            (click)="onEdit($event)"
-          >
-            <app-icon name="edit" size="sm" />
-          </button>
-          <button
-            type="button"
-            class="p-1.5 rounded-lg bg-slate-800/95 text-rose-400 hover:text-rose-300 hover:bg-rose-950/80 shadow-md border border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
-            title="Eliminar marcador"
-            (click)="onDelete($event)"
-          >
-            <app-icon name="trash" size="sm" />
-          </button>
+        <div class="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-md rounded-full shadow-sm border border-slate-200">
+          <app-bookmark-actions-menu
+            [bookmarkId]="bookmark().id"
+            (edit)="onMenuEdit()"
+            (delete)="onMenuDelete()"
+          />
         </div>
       </div>
 
@@ -77,7 +65,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           } @else {
             <app-icon name="globe" size="sm" class="text-slate-400 shrink-0" />
           }
-          <span class="px-2 py-0.5 rounded-md bg-slate-800/80 text-brand-400 border border-slate-700/60 text-[11px] font-bold truncate">
+          <span class="px-2 py-0.5 rounded-md bg-slate-100 text-indigo-600 border border-slate-200 text-[11px] font-bold truncate">
             {{ domainName() }}
           </span>
         </div>
@@ -86,19 +74,19 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           [href]="bookmark().url"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-100 font-bold text-base hover:text-brand-400 transition-colors line-clamp-2 leading-snug mb-1.5"
+          class="text-slate-900 font-bold text-base hover:text-indigo-600 transition-colors line-clamp-2 leading-snug mb-1.5"
           (click)="onOpen($event)"
         >
           {{ bookmark().title }}
         </a>
 
         @if (bookmark().description) {
-          <p class="text-xs text-slate-400 line-clamp-2 mb-3.5 leading-relaxed font-normal">
+          <p class="text-xs text-slate-500 line-clamp-2 mb-3.5 leading-relaxed font-normal">
             {{ bookmark().description }}
           </p>
         }
 
-        <div class="mt-auto pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
+        <div class="mt-auto pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
           @if (folderName()) {
             <app-badge [text]="folderName()!" color="brand" size="sm" [dot]="true" />
           } @else {
@@ -109,7 +97,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
             [href]="bookmark().url"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-xs font-bold text-brand-400 hover:text-brand-300 hover:underline transition-colors"
+            class="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 hover:text-indigo-800 hover:underline transition-colors"
             title="Abrir enlace externo"
           >
             Abrir enlace
@@ -148,15 +136,11 @@ export class BookmarkCardComponent {
     }
   });
 
-  onEdit(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
+  onMenuEdit() {
     this.edit.emit(this.bookmark());
   }
 
-  onDelete(event: MouseEvent) {
-    event.stopPropagation();
-    event.preventDefault();
+  onMenuDelete() {
     this.delete.emit(this.bookmark().id);
   }
 

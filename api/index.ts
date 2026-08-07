@@ -95,7 +95,51 @@ function createLogoutCookie(): string {
   });
 }
 
+const YOUTUBE_URL_REGEX = /^(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([\w-]{11})(?:[\?&].*)?$/i;
+
+async function fetchYouTubeOEmbed(url: string) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+  try {
+    const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+    const response = await fetch(oembedUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = (await response.json()) as {
+      title?: string;
+      author_name?: string;
+      thumbnail_url?: string;
+      provider_name?: string;
+    };
+
+    return {
+      title: data.title || 'Video de YouTube',
+      description: `Canal: ${data.author_name || 'YouTube'}`,
+      ogImage: data.thumbnail_url || null,
+      favicon: 'https://www.youtube.com/favicon.ico',
+      image: data.thumbnail_url || null,
+      siteName: data.provider_name || 'YouTube',
+      url: url,
+    };
+  } catch {
+    clearTimeout(timeoutId);
+    return null;
+  }
+}
+
 async function scrapeMetadata(targetUrl: string) {
+  if (YOUTUBE_URL_REGEX.test(targetUrl)) {
+    const youtubeData = await fetchYouTubeOEmbed(targetUrl);
+    if (youtubeData) {
+      return youtubeData;
+    }
+  }
+
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -105,6 +149,9 @@ async function scrapeMetadata(targetUrl: string) {
     description: null,
     ogImage: null,
     favicon: null,
+    image: null,
+    siteName: fallbackTitle,
+    url: targetUrl,
   };
 
   try {
@@ -175,11 +222,18 @@ async function scrapeMetadata(targetUrl: string) {
       }
     }
 
+    const siteName =
+      $('meta[property="og:site_name"]').attr('content') ||
+      new URL(targetUrl).hostname;
+
     return {
       title,
       description: description ? description.trim() : null,
       ogImage,
       favicon,
+      image: ogImage,
+      siteName,
+      url: targetUrl,
     };
   } catch {
     clearTimeout(timeoutId);
