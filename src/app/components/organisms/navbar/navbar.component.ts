@@ -16,17 +16,17 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
   ],
   template: `
     <header
-      class="sticky top-0 z-30 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 shadow-xs px-4 py-3"
+      class="sticky top-0 z-30 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md px-4 py-3"
     >
-      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 sm:gap-4">
+        <div class="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
-            class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            class="lg:hidden p-2 rounded-xl text-slate-300 hover:bg-slate-800 focus:outline-none transition-colors"
             (click)="toggleSidebar.emit()"
             title="Abrir menú"
           >
-            <app-icon name="folder" size="md" />
+            <app-icon name="menu" size="md" />
           </button>
 
           <div class="flex items-center gap-2.5 select-none">
@@ -35,13 +35,13 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
             >
               <app-icon name="bookmark" size="md" />
             </div>
-            <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <span class="text-xl font-extrabold tracking-tight text-white hidden xs:inline-block">
               FetchMark
             </span>
           </div>
         </div>
 
-        <div class="flex-1 max-w-md mx-4">
+        <div class="flex-1 max-w-md mx-2 sm:mx-4">
           <app-search-bar
             [value]="searchQuery()"
             placeholder="Buscar marcadores..."
@@ -71,18 +71,18 @@ import { SearchBarComponent } from '../../molecules/search-bar/search-bar.compon
           </app-button>
 
           @if (user()) {
-            <div class="flex items-center gap-2.5 pl-3 border-l border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-2.5 pl-3 border-l border-slate-800">
               <app-avatar
                 [src]="user()?.avatarUrl"
                 [name]="user()?.name || user()?.email || 'Usuario'"
                 size="md"
               />
-              <span class="hidden lg:inline-block text-xs font-bold text-slate-800 dark:text-slate-200 max-w-[140px] truncate">
+              <span class="hidden lg:inline-block text-xs font-bold text-slate-200 max-w-[140px] truncate">
                 {{ user()?.name || user()?.email }}
               </span>
               <button
                 type="button"
-                class="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-colors"
+                class="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-950/60 transition-colors"
                 title="Cerrar sesión"
                 (click)="logout.emit()"
               >

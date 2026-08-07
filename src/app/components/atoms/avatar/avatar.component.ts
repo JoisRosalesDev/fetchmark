@@ -13,7 +13,7 @@ import { Component, computed, input, signal } from '@angular/core';
           (error)="onImageError()"
         />
       } @else {
-        <span class="font-bold text-slate-800 dark:text-slate-100 uppercase select-none">
+        <span class="font-bold text-slate-100 uppercase select-none">
           {{ initials() }}
         </span>
       }
@@ -43,7 +43,7 @@ export class AvatarComponent {
 
   containerClasses = computed(() => {
     const base =
-      'relative flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 ring-2 ring-white dark:ring-slate-800 border border-slate-300 dark:border-slate-700 overflow-hidden shrink-0 shadow-xs';
+      'relative flex items-center justify-center rounded-full bg-slate-800 ring-2 ring-slate-800 border border-slate-700 overflow-hidden shrink-0 shadow-xs';
 
     let sizeStyle = '';
     switch (this.size()) {

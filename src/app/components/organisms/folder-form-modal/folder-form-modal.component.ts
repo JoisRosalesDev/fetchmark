@@ -20,7 +20,7 @@ import { ButtonComponent } from '../../atoms/button/button.component';
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in"
       >
         <div
-          class="bg-white dark:bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 animate-slide-up p-6"
+          class="bg-slate-900 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-slate-800 animate-slide-up p-6 text-slate-100"
         >
           <app-modal-header
             [title]="isEditing() ? 'Editar Carpeta' : 'Nueva Carpeta'"
@@ -34,7 +34,7 @@ import { ButtonComponent } from '../../atoms/button/button.component';
 
           <form (ngSubmit)="onSubmit()" class="mt-4 space-y-4">
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                 Nombre de la carpeta <span class="text-rose-500">*</span>
               </label>
               <input
@@ -43,18 +43,18 @@ import { ButtonComponent } from '../../atoms/button/button.component';
                 name="name"
                 required
                 placeholder="Ej. Recursos Web, Trabajo, Tutoriales"
-                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 outline-none transition-all shadow-xs"
+                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 placeholder-slate-500 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
               />
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                 Carpeta Superior
               </label>
               <select
                 [(ngModel)]="parentId"
                 name="parentId"
-                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 outline-none transition-all shadow-xs"
+                class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-800 bg-slate-950 text-slate-100 focus:bg-slate-900 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 outline-none transition-all shadow-xs"
               >
                 <option [value]="null">Ninguna (Carpeta raíz)</option>
                 @for (f of availableParentFolders(); track f.id) {
@@ -63,7 +63,7 @@ import { ButtonComponent } from '../../atoms/button/button.component';
               </select>
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800 mt-6">
+            <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800 mt-6">
               <app-button variant="ghost" size="md" (btnClick)="onClose()">
                 Cancelar
               </app-button>

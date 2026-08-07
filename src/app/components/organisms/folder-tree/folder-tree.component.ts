@@ -11,12 +11,12 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   template: `
     <div class="flex flex-col h-full">
       <div class="flex items-center justify-between px-3 py-2 mb-2">
-        <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+        <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
           Carpetas
         </h2>
         <button
           type="button"
-          class="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-brand-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          class="p-1.5 rounded-lg text-slate-400 hover:text-brand-400 hover:bg-slate-800 transition-colors"
           title="Crear carpeta"
           (click)="onCreateClick()"
         >
@@ -33,11 +33,11 @@ import { IconComponent } from '../../atoms/icon/icon.component';
             <app-icon
               name="bookmark"
               size="md"
-              [class]="activeFolderId() === null ? 'text-brand-600 dark:text-brand-400' : 'text-slate-500 dark:text-slate-400'"
+              [class]="activeFolderId() === null ? 'text-brand-400' : 'text-slate-400'"
             />
             <span class="truncate text-sm font-semibold tracking-tight">Todos los marcadores</span>
           </div>
-          <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+          <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700/60">
             {{ totalBookmarksCount() }}
           </span>
         </div>
@@ -55,15 +55,15 @@ import { IconComponent } from '../../atoms/icon/icon.component';
         }
       </div>
 
-      <div class="pt-4 border-t border-slate-200/80 dark:border-slate-800 mt-2">
+      <div class="pt-4 border-t border-slate-800 mt-2">
         <app-button
           variant="ghost"
           size="sm"
           [fullWidth]="true"
-          class="justify-start text-slate-700 dark:text-slate-300 font-semibold"
+          class="justify-start text-slate-300 hover:text-white font-semibold"
           (btnClick)="onCreateClick()"
         >
-          <app-icon name="plus" size="sm" class="mr-2 text-brand-600 dark:text-brand-400" />
+          <app-icon name="plus" size="sm" class="mr-2 text-brand-400" />
           Nueva carpeta
         </app-button>
       </div>
@@ -85,9 +85,9 @@ export class FolderTreeComponent {
     const base =
       'group flex items-center justify-between py-2 px-3 rounded-xl transition-all duration-150 cursor-pointer select-none state-focus';
     if (this.activeFolderId() === null) {
-      return `${base} border-l-4 border-brand-600 dark:border-brand-500 bg-brand-50/90 dark:bg-brand-950/60 text-brand-900 dark:text-brand-100 font-bold shadow-xs`;
+      return `${base} bg-brand-600/20 text-brand-400 border-l-4 border-brand-500 font-semibold shadow-xs`;
     }
-    return `${base} border-l-4 border-transparent text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white`;
+    return `${base} border-l-4 border-transparent text-slate-300 hover:bg-slate-800/70 hover:text-slate-100 font-medium`;
   }
 
   getFolderBookmarkCount(folderId: string): number {

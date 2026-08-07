@@ -10,7 +10,7 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
   template: `
     <app-auth-layout>
       <div
-        class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-200/80 dark:border-slate-800/80 text-center animate-fade-in"
+        class="bg-slate-900/95 backdrop-blur-xl rounded-3xl p-8 sm:p-10 shadow-2xl border border-slate-800 text-center animate-fade-in"
       >
         <div
           class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-violet-500 flex items-center justify-center text-white mx-auto mb-6 shadow-xl shadow-brand-500/35 ring-4 ring-brand-500/10"
@@ -18,31 +18,31 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
           <app-icon name="bookmark" size="lg" />
         </div>
 
-        <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
+        <h1 class="text-3xl font-extrabold text-white tracking-tight mb-2">
           Bienvenido a FetchMark
         </h1>
-        <p class="text-sm text-slate-600 dark:text-slate-300 mb-8 leading-relaxed font-medium">
+        <p class="text-sm text-slate-300 mb-8 leading-relaxed font-medium">
           Tu gestor inteligente de marcadores. Organiza, descubre y accede a tus sitios web favoritos con extracción automática de metadatos.
         </p>
 
-        <div class="space-y-3 mb-8 text-left bg-slate-50 dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200/70 dark:border-slate-700/60 shadow-xs">
-          <div class="flex items-center gap-3 text-xs font-semibold text-slate-800 dark:text-slate-200">
-            <app-icon name="check" size="sm" class="text-emerald-500 shrink-0" />
+        <div class="space-y-3 mb-8 text-left bg-slate-950/70 p-4 rounded-2xl border border-slate-800 shadow-xs">
+          <div class="flex items-center gap-3 text-xs font-semibold text-slate-200">
+            <app-icon name="check" size="sm" class="text-emerald-400 shrink-0" />
             <span>Extracción automática de imágenes y descripciones OpenGraph</span>
           </div>
-          <div class="flex items-center gap-3 text-xs font-semibold text-slate-800 dark:text-slate-200">
-            <app-icon name="check" size="sm" class="text-emerald-500 shrink-0" />
+          <div class="flex items-center gap-3 text-xs font-semibold text-slate-200">
+            <app-icon name="check" size="sm" class="text-emerald-400 shrink-0" />
             <span>Organización por carpetas jerárquicas</span>
           </div>
-          <div class="flex items-center gap-3 text-xs font-semibold text-slate-800 dark:text-slate-200">
-            <app-icon name="check" size="sm" class="text-emerald-500 shrink-0" />
+          <div class="flex items-center gap-3 text-xs font-semibold text-slate-200">
+            <app-icon name="check" size="sm" class="text-emerald-400 shrink-0" />
             <span>Búsqueda rápida en tiempo real</span>
           </div>
         </div>
 
         <button
           type="button"
-          class="w-full bg-white hover:bg-slate-50 text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-white border border-slate-300 dark:border-slate-700 font-bold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm focus:ring-4 focus:ring-brand-500/20 cursor-pointer"
+          class="w-full bg-slate-800 hover:bg-slate-750 text-white border border-slate-700 font-bold py-3.5 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm focus:ring-4 focus:ring-brand-500/20 cursor-pointer"
           (click)="onGoogleLogin()"
         >
           <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
@@ -66,7 +66,7 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
           <span>Iniciar sesión con Google</span>
         </button>
 
-        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-6 font-medium">
+        <p class="text-[11px] text-slate-400 mt-6 font-medium">
           Al iniciar sesión, aceptas los términos de servicio y políticas de privacidad de FetchMark.
         </p>
       </div>

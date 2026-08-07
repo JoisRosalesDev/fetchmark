@@ -27,7 +27,10 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
     IconComponent,
   ],
   template: `
-    <app-dashboard-layout>
+    <app-dashboard-layout
+      [isSidebarOpen]="isMobileSidebarOpen()"
+      (closeSidebar)="isMobileSidebarOpen.set(false)"
+    >
       <app-navbar
         navbar
         [user]="authService.currentUser()"
@@ -36,6 +39,7 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
         (newBookmark)="onOpenNewBookmarkModal()"
         (newFolder)="onOpenNewFolderModal()"
         (logout)="onLogout()"
+        (toggleSidebar)="isMobileSidebarOpen.update(v => !v)"
       />
 
       <app-folder-tree
@@ -51,12 +55,12 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
       />
 
       <div content class="space-y-6">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">
+            <h1 class="text-xl font-bold text-slate-100">
               {{ activeFolderName() }}
             </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p class="text-xs text-slate-400 mt-0.5">
               {{ bookmarkService.bookmarks().length }} marcadores guardados
             </p>
           </div>
@@ -120,6 +124,8 @@ export class DashboardPageComponent implements OnInit {
   bookmarkService = inject(BookmarkService);
   private platformId = inject(PLATFORM_ID);
 
+  isMobileSidebarOpen = signal<boolean>(false);
+
   isBookmarkModalOpen = signal<boolean>(false);
   editingBookmark = signal<Bookmark | null>(null);
   isSavingBookmark = signal<boolean>(false);
@@ -160,6 +166,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   onSelectFolder(folderId: string | null): void {
+    this.isMobileSidebarOpen.set(false);
     this.folderService.setActiveFolder(folderId);
     this.loadCurrentBookmarks();
   }

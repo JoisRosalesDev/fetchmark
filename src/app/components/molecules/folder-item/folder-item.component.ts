@@ -22,14 +22,14 @@ import { IconComponent } from '../../atoms/icon/icon.component';
       </div>
 
       <div class="flex items-center gap-1.5 shrink-0 ml-2">
-        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-800/80 text-slate-300 border border-slate-700/60">
           {{ count() }}
         </span>
 
         <div class="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
           <button
             type="button"
-            class="p-1 rounded-md text-slate-500 hover:text-brand-600 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 transition-colors"
+            class="p-1 rounded-md text-slate-400 hover:text-brand-400 hover:bg-slate-700/80 transition-colors"
             title="Editar carpeta"
             (click)="onEdit($event)"
           >
@@ -37,7 +37,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           </button>
           <button
             type="button"
-            class="p-1 rounded-md text-slate-500 hover:text-rose-600 hover:bg-rose-100 dark:hover:bg-rose-950/60 transition-colors"
+            class="p-1 rounded-md text-slate-400 hover:text-rose-400 hover:bg-rose-950/80 transition-colors"
             title="Eliminar carpeta"
             (click)="onDelete($event)"
           >
@@ -67,17 +67,17 @@ export class FolderItemComponent {
       'group flex items-center justify-between py-2 pr-3 rounded-xl transition-all duration-150 cursor-pointer select-none state-focus';
 
     if (this.isActive()) {
-      return `${base} border-l-4 border-brand-600 dark:border-brand-500 bg-brand-50/90 dark:bg-brand-950/60 text-brand-900 dark:text-brand-100 font-bold shadow-xs`;
+      return `${base} bg-brand-600/20 text-brand-400 border-l-4 border-brand-500 font-semibold shadow-xs`;
     }
 
-    return `${base} border-l-4 border-transparent text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white`;
+    return `${base} border-l-4 border-transparent text-slate-300 hover:bg-slate-800/70 hover:text-slate-100 font-medium`;
   });
 
   iconClasses = computed(() => {
     if (this.isActive()) {
-      return 'text-brand-600 dark:text-brand-400';
+      return 'text-brand-400';
     }
-    return 'text-slate-500 group-hover:text-brand-600 dark:text-slate-400 dark:group-hover:text-brand-400';
+    return 'text-slate-400 group-hover:text-brand-400';
   });
 
   onSelect(event: MouseEvent) {

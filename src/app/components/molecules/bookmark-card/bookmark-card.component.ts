@@ -9,9 +9,9 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   imports: [BadgeComponent, IconComponent],
   template: `
     <div
-      class="group relative flex flex-col h-full bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl overflow-hidden shadow-xs hover:shadow-xl hover:border-brand-500/40 hover:-translate-y-1 transition-all duration-200 break-inside-avoid"
+      class="group relative flex flex-col h-full bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xs hover:border-brand-500/50 hover:shadow-lg hover:shadow-brand-950/40 hover:-translate-y-1 transition-all duration-200 text-slate-100 break-inside-avoid"
     >
-      <div class="relative w-full aspect-[16/9] overflow-hidden bg-slate-100 dark:bg-slate-800/80 shrink-0 border-b border-slate-100 dark:border-slate-800/80">
+      <div class="relative w-full aspect-[16/9] overflow-hidden bg-slate-950 shrink-0 border-b border-slate-800">
         @if (bookmark().ogImage && !hasImageError()) {
           <img
             [src]="bookmark().ogImage"
@@ -21,10 +21,10 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           />
         } @else {
           <div
-            class="h-full w-full bg-gradient-to-br from-brand-50/80 via-slate-50 to-indigo-50/80 dark:from-slate-900 dark:via-slate-850 dark:to-indigo-950/40 flex flex-col items-center justify-center p-4 text-center"
+            class="h-full w-full bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950/60 flex flex-col items-center justify-center p-4 text-center"
           >
             <div
-              class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-xs flex items-center justify-center text-brand-600 dark:text-brand-400 mb-1.5 border border-slate-200/60 dark:border-slate-700/60"
+              class="w-10 h-10 rounded-full bg-slate-800 shadow-xs flex items-center justify-center text-brand-400 mb-1.5 border border-slate-700/60"
             >
               @if (bookmark().favicon && !hasFaviconError()) {
                 <img
@@ -37,7 +37,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
                 <app-icon name="globe" size="lg" />
               }
             </div>
-            <span class="text-xs font-bold text-slate-700 dark:text-slate-300 truncate max-w-full px-2">
+            <span class="text-xs font-bold px-2 py-0.5 rounded-md bg-slate-800/80 text-brand-400 border border-slate-700/60 truncate max-w-full">
               {{ domainName() }}
             </span>
           </div>
@@ -48,7 +48,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
         >
           <button
             type="button"
-            class="p-1.5 rounded-lg bg-white/95 dark:bg-slate-800/95 text-slate-700 dark:text-slate-200 hover:text-brand-600 dark:hover:text-brand-400 shadow-md border border-slate-200/60 dark:border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
+            class="p-1.5 rounded-lg bg-slate-800/95 text-slate-200 hover:text-brand-400 shadow-md border border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
             title="Editar marcador"
             (click)="onEdit($event)"
           >
@@ -56,7 +56,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           </button>
           <button
             type="button"
-            class="p-1.5 rounded-lg bg-white/95 dark:bg-slate-800/95 text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/80 shadow-md border border-slate-200/60 dark:border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
+            class="p-1.5 rounded-lg bg-slate-800/95 text-rose-400 hover:text-rose-300 hover:bg-rose-950/80 shadow-md border border-slate-700/60 backdrop-blur-sm transition-all hover:scale-105"
             title="Eliminar marcador"
             (click)="onDelete($event)"
           >
@@ -75,9 +75,9 @@ import { IconComponent } from '../../atoms/icon/icon.component';
               (error)="onFaviconError()"
             />
           } @else {
-            <app-icon name="globe" size="sm" class="text-slate-500 dark:text-slate-400 shrink-0" />
+            <app-icon name="globe" size="sm" class="text-slate-400 shrink-0" />
           }
-          <span class="text-xs font-semibold text-slate-600 dark:text-slate-400 truncate tracking-wide">
+          <span class="px-2 py-0.5 rounded-md bg-slate-800/80 text-brand-400 border border-slate-700/60 text-[11px] font-bold truncate">
             {{ domainName() }}
           </span>
         </div>
@@ -86,19 +86,19 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           [href]="bookmark().url"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-slate-900 dark:text-slate-100 font-bold text-base hover:text-brand-600 dark:hover:text-brand-400 transition-colors line-clamp-2 leading-snug mb-1.5"
+          class="text-slate-100 font-bold text-base hover:text-brand-400 transition-colors line-clamp-2 leading-snug mb-1.5"
           (click)="onOpen($event)"
         >
           {{ bookmark().title }}
         </a>
 
         @if (bookmark().description) {
-          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mb-3.5 leading-relaxed font-normal">
+          <p class="text-xs text-slate-400 line-clamp-2 mb-3.5 leading-relaxed font-normal">
             {{ bookmark().description }}
           </p>
         }
 
-        <div class="mt-auto pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+        <div class="mt-auto pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
           @if (folderName()) {
             <app-badge [text]="folderName()!" color="brand" size="sm" [dot]="true" />
           } @else {
@@ -109,7 +109,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
             [href]="bookmark().url"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-xs font-bold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 hover:underline transition-colors"
+            class="inline-flex items-center gap-1 text-xs font-bold text-brand-400 hover:text-brand-300 hover:underline transition-colors"
             title="Abrir enlace externo"
           >
             Abrir enlace

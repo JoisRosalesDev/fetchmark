@@ -16,24 +16,24 @@ import { IconComponent } from '../../atoms/icon/icon.component';
   ],
   template: `
     @if (loading()) {
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         @for (item of skeletonArray; track $index) {
           <app-bookmark-skeleton />
         }
       </div>
     } @else if (bookmarks().length === 0) {
       <div
-        class="flex flex-col items-center justify-center p-10 text-center bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 my-6 shadow-xs"
+        class="flex flex-col items-center justify-center p-10 text-center bg-slate-900 rounded-2xl border border-dashed border-slate-800 my-6 shadow-xs"
       >
         <div
-          class="w-16 h-16 rounded-2xl bg-brand-50 dark:bg-brand-950/60 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 ring-1 ring-brand-500/20"
+          class="w-16 h-16 rounded-2xl bg-brand-950/60 flex items-center justify-center text-brand-400 mb-4 ring-1 ring-brand-500/20"
         >
           <app-icon name="bookmark" size="lg" />
         </div>
-        <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1.5">
+        <h3 class="text-lg font-bold text-slate-100 mb-1.5">
           No hay marcadores
         </h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 max-w-md mb-6 leading-relaxed font-medium">
+        <p class="text-sm text-slate-400 max-w-md mb-6 leading-relaxed font-medium">
           Aún no se han agregado marcadores en esta categoría. Comienza a guardar tus enlaces preferidos para acceder a ellos rápidamente.
         </p>
         <app-button variant="primary" size="md" (btnClick)="onCreateClick()">
@@ -42,7 +42,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
         </app-button>
       </div>
     } @else {
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         @for (item of bookmarks(); track item.id) {
           <app-bookmark-card
             [bookmark]="item"
