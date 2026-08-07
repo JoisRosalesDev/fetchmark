@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IconComponent } from '../../components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [IconComponent],
+  imports: [RouterLink, IconComponent],
   template: `
     <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans overflow-x-hidden">
       <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-indigo-100/60 shadow-xs px-4 sm:px-6 py-4">
@@ -19,14 +19,13 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
             </span>
           </div>
 
-          <button
-            type="button"
-            (click)="onGoogleLogin()"
+          <a
+            routerLink="/login"
             class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md hover:shadow-indigo-500/20 transition-all text-sm flex items-center gap-2 cursor-pointer"
           >
             Iniciar Sesión
             <app-icon name="arrow-right" size="sm" />
-          </button>
+          </a>
         </div>
       </header>
 
@@ -37,7 +36,6 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
           <div class="relative z-10 max-w-4xl mx-auto">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50/90 border border-indigo-200/60 text-indigo-700 text-xs font-bold mb-6 animate-fade-in shadow-xs">
               <span class="flex h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
-              <app-icon name="star" size="sm" class="text-indigo-600" />
               Novedad: Soporte dedicado para YouTube oEmbed
             </div>
 
@@ -53,14 +51,13 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up delay-100">
-              <button
-                type="button"
-                (click)="onGoogleLogin()"
+              <a
+                routerLink="/login"
                 class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-lg font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 Comenzar gratis
                 <app-icon name="arrow-right" size="md" />
-              </button>
+              </a>
             </div>
 
             <div class="bg-white/90 backdrop-blur-md border border-indigo-100 shadow-2xl shadow-indigo-500/10 rounded-2xl p-6 sm:p-8 animate-slide-up delay-200 text-left max-w-4xl mx-auto">
@@ -176,37 +173,97 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
               <p class="text-indigo-100 text-base sm:text-lg mb-8 max-w-xl mx-auto font-medium leading-relaxed">
                 Empieza a utilizar FetchMark hoy mismo y mantén tus enlaces esenciales al alcance de un clic.
               </p>
-              <button
-                type="button"
-                (click)="onGoogleLogin()"
+              <a
+                routerLink="/login"
                 class="inline-flex items-center gap-2 bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-lg cursor-pointer"
               >
                 Comenzar con Google
                 <app-icon name="arrow-right" size="md" />
-              </button>
+              </a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer class="bg-white border-t border-slate-200/80 py-8 px-4 sm:px-6 text-center text-xs text-slate-500 font-medium">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="flex items-center gap-2">
-            <div class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
-              F
+      <footer class="bg-slate-50 border-t border-slate-200/80 pt-16 pb-12 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-200/80">
+            <div class="lg:col-span-2 space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-blue-600 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+                  <app-icon name="bookmark" size="md" />
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-slate-900">
+                  FetchMark
+                </span>
+              </div>
+              <p class="text-sm text-slate-600 max-w-sm leading-relaxed font-medium">
+                La plataforma inteligente para guardar, extraer metadatos OpenGraph y organizar tus marcadores web en un solo lugar.
+              </p>
+              <div class="flex flex-wrap items-center gap-2 pt-2">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold">
+                  <app-icon name="code" size="sm" /> Angular 22 Signals
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold">
+                  <app-icon name="zap" size="sm" /> Express Serverless
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold">
+                  <app-icon name="shield" size="sm" /> Supabase & Prisma
+                </span>
+              </div>
             </div>
-            <span class="font-bold text-slate-700">FetchMark</span>
+
+            <div>
+              <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Producto</h3>
+              <ul class="space-y-2.5 text-sm font-medium text-slate-600">
+                <li><a routerLink="/login" class="hover:text-indigo-600 transition-colors">Scraping OpenGraph</a></li>
+                <li><a routerLink="/login" class="hover:text-indigo-600 transition-colors">YouTube oEmbed</a></li>
+                <li><a routerLink="/login" class="hover:text-indigo-600 transition-colors">Gestión de Carpetas</a></li>
+                <li><a routerLink="/login" class="hover:text-indigo-600 transition-colors">Búsqueda Reactiva</a></li>
+                <li><a routerLink="/login" class="hover:text-indigo-600 transition-colors">Diseño Responsive</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Arquitectura</h3>
+              <ul class="space-y-2.5 text-sm font-medium text-slate-600">
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Angular Standalone</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Express on Vercel</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Supabase PostgreSQL</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Prisma ORM Client</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Cheerio HTML Parser</span></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Seguridad & Legal</h3>
+              <ul class="space-y-2.5 text-sm font-medium text-slate-600">
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Autenticación Google OAuth2</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Tokens JWT en HTTP-Only</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Aislamiento por usuario</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Términos de servicio</span></li>
+                <li><span class="hover:text-slate-900 transition-colors cursor-default">Política de privacidad</span></li>
+              </ul>
+            </div>
           </div>
-          <p>© 2026 FetchMark. Todos los derechos reservados.</p>
+
+          <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-slate-500">
+            <p>© 2026 FetchMark. Todos los derechos reservados. Desarrollado con Angular 22 & Supabase.</p>
+            <div class="flex items-center gap-4">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-xs" title="GitHub">
+                <app-icon name="github" size="sm" />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-xs" title="Twitter">
+                <app-icon name="twitter" size="sm" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-all shadow-xs" title="LinkedIn">
+                <app-icon name="linkedin" size="sm" />
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
   `,
 })
-export class LandingPageComponent {
-  private authService = inject(AuthService);
-
-  onGoogleLogin(): void {
-    this.authService.loginWithGoogle();
-  }
-}
+export class LandingPageComponent {}
