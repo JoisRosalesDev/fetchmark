@@ -60,6 +60,12 @@ function parseCookies(req: Request): Record<string, string | undefined> {
   return {};
 }
 
+function getStringParam(val: unknown): string {
+  if (typeof val === 'string') return val;
+  if (Array.isArray(val) && typeof val[0] === 'string') return val[0];
+  return '';
+}
+
 function getAuthenticatedUser(req: Request): AuthPayload | null {
   const cookies = parseCookies(req);
   const token = cookies[COOKIE_NAME];
@@ -437,7 +443,7 @@ app.get('/api/folders/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const folder = await prisma.folder.findFirst({
     where: { id, userId: auth.userId },
   });
@@ -457,7 +463,7 @@ app.put('/api/folders/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const { name, color, icon, parentId } = req.body || {};
 
   const existingFolder = await prisma.folder.findFirst({
@@ -507,7 +513,7 @@ app.delete('/api/folders/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const existingFolder = await prisma.folder.findFirst({
     where: { id, userId: auth.userId },
   });
@@ -556,14 +562,16 @@ app.get('/api/bookmarks', async (req: Request, res: Response) => {
     return;
   }
 
-  const folderId = req.query['folderId'] as string | undefined;
-  const query = req.query['query'] as string | undefined;
+  const rawFolderId = req.query['folderId'];
+  const folderId = rawFolderId !== undefined ? getStringParam(rawFolderId) : undefined;
+  const rawQuery = req.query['query'];
+  const query = rawQuery !== undefined ? getStringParam(rawQuery) : undefined;
 
   const whereCondition: Record<string, unknown> = {
     userId: auth.userId,
   };
 
-  if (folderId) {
+  if (folderId !== undefined) {
     whereCondition['folderId'] = folderId === 'null' ? null : folderId;
   }
 
@@ -642,7 +650,7 @@ app.get('/api/bookmarks/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const bookmark = await prisma.bookmark.findFirst({
     where: { id, userId: auth.userId },
   });
@@ -662,7 +670,7 @@ app.put('/api/bookmarks/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const { title, url, description, ogImage, favicon, folderId } = req.body || {};
 
   const existingBookmark = await prisma.bookmark.findFirst({
@@ -710,7 +718,7 @@ app.delete('/api/bookmarks/:id', async (req: Request, res: Response) => {
     return;
   }
 
-  const id = req.params['id'] || (req.query['id'] as string);
+  const id = getStringParam(req.params['id'] || req.query['id']);
   const existingBookmark = await prisma.bookmark.findFirst({
     where: { id, userId: auth.userId },
   });
