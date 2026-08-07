@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../core/services/auth.service';
 import { IconComponent } from '../../components/atoms/icon/icon.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [RouterLink, IconComponent],
+  imports: [IconComponent],
   template: `
     <div class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans overflow-x-hidden">
       <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-indigo-100/60 shadow-xs px-4 sm:px-6 py-4">
@@ -19,13 +19,14 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
             </span>
           </div>
 
-          <a
-            routerLink="/login"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md hover:shadow-indigo-500/20 transition-all text-sm flex items-center gap-2"
+          <button
+            type="button"
+            (click)="onGoogleLogin()"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-sm hover:shadow-md hover:shadow-indigo-500/20 transition-all text-sm flex items-center gap-2 cursor-pointer"
           >
             Iniciar Sesión
             <app-icon name="arrow-right" size="sm" />
-          </a>
+          </button>
         </div>
       </header>
 
@@ -52,13 +53,14 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up delay-100">
-              <a
-                routerLink="/login"
+              <button
+                type="button"
+                (click)="onGoogleLogin()"
                 class="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-lg font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 Comenzar gratis
                 <app-icon name="arrow-right" size="md" />
-              </a>
+              </button>
             </div>
 
             <div class="bg-white/90 backdrop-blur-md border border-indigo-100 shadow-2xl shadow-indigo-500/10 rounded-2xl p-6 sm:p-8 animate-slide-up delay-200 text-left max-w-4xl mx-auto">
@@ -174,13 +176,14 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
               <p class="text-indigo-100 text-base sm:text-lg mb-8 max-w-xl mx-auto font-medium leading-relaxed">
                 Empieza a utilizar FetchMark hoy mismo y mantén tus enlaces esenciales al alcance de un clic.
               </p>
-              <a
-                routerLink="/login"
+              <button
+                type="button"
+                (click)="onGoogleLogin()"
                 class="inline-flex items-center gap-2 bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-lg cursor-pointer"
               >
                 Comenzar con Google
                 <app-icon name="arrow-right" size="md" />
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -200,5 +203,10 @@ import { IconComponent } from '../../components/atoms/icon/icon.component';
     </div>
   `,
 })
-export class LandingPageComponent {}
+export class LandingPageComponent {
+  private authService = inject(AuthService);
 
+  onGoogleLogin(): void {
+    this.authService.loginWithGoogle();
+  }
+}
