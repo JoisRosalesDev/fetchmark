@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "prisma generate && ng build",
+    "postinstall": "prisma generate",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:fetchmark": "node dist/fetchmark/server/server.mjs"
