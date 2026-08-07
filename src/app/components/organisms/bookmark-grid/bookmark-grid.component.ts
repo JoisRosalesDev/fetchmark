@@ -23,17 +23,17 @@ import { IconComponent } from '../../atoms/icon/icon.component';
       </div>
     } @else if (bookmarks().length === 0) {
       <div
-        class="empty-container flex flex-col items-center justify-center p-12 text-center surface-card rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 my-8"
+        class="flex flex-col items-center justify-center p-10 text-center bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 my-6 shadow-xs"
       >
         <div
-          class="w-16 h-16 rounded-2xl bg-brand-50 dark:bg-brand-950/50 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 shadow-inner"
+          class="w-16 h-16 rounded-2xl bg-brand-50 dark:bg-brand-950/60 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4 ring-1 ring-brand-500/20"
         >
           <app-icon name="bookmark" size="lg" />
         </div>
-        <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-1.5">
           No hay marcadores
         </h3>
-        <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md mb-6 leading-relaxed">
+        <p class="text-sm text-slate-600 dark:text-slate-400 max-w-md mb-6 leading-relaxed font-medium">
           Aún no se han agregado marcadores en esta categoría. Comienza a guardar tus enlaces preferidos para acceder a ellos rápidamente.
         </p>
         <app-button variant="primary" size="md" (btnClick)="onCreateClick()">

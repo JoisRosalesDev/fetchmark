@@ -12,24 +12,24 @@ import { IconComponent } from '../../atoms/icon/icon.component';
       [style.paddingLeft.px]="indentPadding()"
       (click)="onSelect($event)"
     >
-      <div class="flex items-center gap-2 min-w-0 flex-1">
+      <div class="flex items-center gap-2.5 min-w-0 flex-1">
         <app-icon
           [name]="isActive() ? 'folder-plus' : 'folder'"
           size="md"
           [class]="iconClasses()"
         />
-        <span class="truncate text-sm font-medium">{{ folder().name }}</span>
+        <span class="truncate text-sm font-semibold tracking-tight">{{ folder().name }}</span>
       </div>
 
-      <div class="flex items-center gap-1 shrink-0 ml-2">
-        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-200/60 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
+      <div class="flex items-center gap-1.5 shrink-0 ml-2">
+        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
           {{ count() }}
         </span>
 
         <div class="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
           <button
             type="button"
-            class="p-1 rounded text-slate-500 hover:text-brand-600 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            class="p-1 rounded-md text-slate-500 hover:text-brand-600 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 transition-colors"
             title="Editar carpeta"
             (click)="onEdit($event)"
           >
@@ -37,7 +37,7 @@ import { IconComponent } from '../../atoms/icon/icon.component';
           </button>
           <button
             type="button"
-            class="p-1 rounded text-slate-500 hover:text-rose-600 hover:bg-rose-100 dark:hover:bg-rose-950/50 transition-colors"
+            class="p-1 rounded-md text-slate-500 hover:text-rose-600 hover:bg-rose-100 dark:hover:bg-rose-950/60 transition-colors"
             title="Eliminar carpeta"
             (click)="onDelete($event)"
           >
@@ -67,17 +67,17 @@ export class FolderItemComponent {
       'group flex items-center justify-between py-2 pr-3 rounded-xl transition-all duration-150 cursor-pointer select-none state-focus';
 
     if (this.isActive()) {
-      return `${base} bg-brand-50 text-brand-700 font-semibold dark:bg-brand-950/50 dark:text-brand-300 shadow-sm`;
+      return `${base} border-l-4 border-brand-600 dark:border-brand-500 bg-brand-50/90 dark:bg-brand-950/60 text-brand-900 dark:text-brand-100 font-bold shadow-xs`;
     }
 
-    return `${base} text-slate-700 hover:bg-slate-200/60 dark:text-slate-300 dark:hover:bg-slate-800/60`;
+    return `${base} border-l-4 border-transparent text-slate-700 dark:text-slate-200 font-medium hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-white`;
   });
 
   iconClasses = computed(() => {
     if (this.isActive()) {
       return 'text-brand-600 dark:text-brand-400';
     }
-    return 'text-slate-400 group-hover:text-brand-600 dark:group-hover:text-brand-400';
+    return 'text-slate-500 group-hover:text-brand-600 dark:text-slate-400 dark:group-hover:text-brand-400';
   });
 
   onSelect(event: MouseEvent) {
